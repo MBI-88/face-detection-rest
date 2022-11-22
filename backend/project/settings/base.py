@@ -1,19 +1,27 @@
-from env import BaseEnv
+from config import BaseEnv
+from functools import lru_cache
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
-settings = BaseEnv()
+# Cache settings
+
+@lru_cache
+def get_config() -> BaseEnv:
+    return BaseEnv()
+
+# Hash Key
+HASH_KEY = "FastApi-weak-password"
 
 # MIDDLEWARE
 
 # Host 
 
-origins = settings.origins
+ORIGINS = ["*"]
 
 # Headers 
 
-headers = [
+HEADERS = [
     "Accept-Encoding","Accept-Patch",
     "Access-Control-Allow-Credentials",
     "Access-Control-Allow-Header",
@@ -29,13 +37,16 @@ headers = [
 
 # Credentials (Cookie Cross Origin)
 
-credentials = True
+CREDENTIALS = True
 
 # Methods 
 
-methods = ['GET','POST']
+METHODS = ['GET','POST']
 
-# Data Base
+
+
+
+
 
 
 

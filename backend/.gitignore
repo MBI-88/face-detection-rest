@@ -1,4 +1,4 @@
 # testing
 /coverage
 /__pycache__
-.env
+.env_backend
