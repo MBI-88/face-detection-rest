@@ -24,7 +24,7 @@ PORT_APP = settings.PORT_APP
 
 # App 
 
-app = FastAPI(debug=settings.DEBUG)
+app = FastAPI(debug=settings.DEBUG,description="Rest application for detection of faces")
 
 # Middleware
 
