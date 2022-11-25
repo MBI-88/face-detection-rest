@@ -5,7 +5,6 @@ import numpy as np
 from .serializers import DataInterface
 
 
-
 # Tools
 age_labels = ['0-2', '4-6', '8-12', '15-20',
               '25-32', '38-43', '48-53', '60+']
@@ -32,9 +31,9 @@ async def send_data(
     list_data = []
     while True:
         data_to_send = {
-            'area':[],
-            'age':'',
-            'age_conf':0.0,
+            'area': [],
+            'age': '',
+            'age_conf': 0.0,
             'gender': '',
             'gender_conf': 0.0
         }
@@ -82,17 +81,16 @@ async def send_data(
                     gender_id = np.argmax(gender_results)
                     gender_label = gender_labels[gender_id]
                     gender_confidence = gender_results[0, gender_id]
-            
+
                     data_to_send['area'] = (x0, y0, x1, y1)
                     data_to_send['age'] = age_label
                     data_to_send['age_conf'] = age_confidence
                     data_to_send['gender'] = gender_label
                     data_to_send['gender_conf'] = gender_confidence
                     list_data.append(data_to_send)
-                    
+
             data_face = DataInterface(faces=list_data)
         else:
             data_face = DataInterface(faces=[])
 
         await websocket.send_json(data_face.dict())
-        
