@@ -2,7 +2,7 @@ from fastapi import WebSocket
 from asyncio import Queue, QueueFull
 import cv2
 import numpy as np
-from .serializers import DataInterface
+from .serializers import Face
 
 
 # Tools
@@ -30,13 +30,6 @@ async def send_data(
 ) -> None:
     list_data = []
     while True:
-        data_to_send = {
-            'area': [],
-            'age': '',
-            'age_conf': 0.0,
-            'gender': '',
-            'gender_conf': 0.0
-        }
         data = await queue.get()
         img = np.frombuffer(data, dtype=np.uint8)
         img = cv2.imdecode(img, 1)
@@ -74,23 +67,29 @@ async def send_data(
                     age_results = age_model.forward()
                     age_id = np.argmax(age_results)
                     age_label = age_labels[age_id]
-                    age_confidence = age_results[0, age_id]
+                    age_confidence = age_results[0, age_id] * 100.0
 
                     gender_model.setInput(age_gender_blob)
                     gender_results = gender_model.forward()
                     gender_id = np.argmax(gender_results)
                     gender_label = gender_labels[gender_id]
-                    gender_confidence = gender_results[0, gender_id]
+                    gender_confidence = gender_results[0, gender_id] * 100.0
 
-                    data_to_send['area'] = (x0, y0, x1, y1)
-                    data_to_send['age'] = age_label
-                    data_to_send['age_conf'] = age_confidence
-                    data_to_send['gender'] = gender_label
-                    data_to_send['gender_conf'] = gender_confidence
-                    list_data.append(data_to_send)
+                    list_data.append(
+                        {
+                            'area': (x0, y0, x1, y1),
+                            'age': age_label,
+                            'age_conf': age_confidence,
+                            'gender': gender_label,
+                            'gender_conf': gender_confidence
+                        }
+                    )
 
-            data_face = DataInterface(faces=list_data)
+                continue
+            
+            data_face = Face(data=list_data)
+
         else:
-            data_face = DataInterface(faces=[])
+            data_face = Face(data=[])
 
         await websocket.send_json(data_face.dict())

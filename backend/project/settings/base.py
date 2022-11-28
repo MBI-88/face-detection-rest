@@ -1,4 +1,4 @@
-from config import BaseEnv
+from .config import BaseEnv
 from functools import lru_cache
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.middleware.cors import CORSMiddleware

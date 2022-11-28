@@ -2,7 +2,11 @@ from argparse import ArgumentParser, RawDescriptionHelpFormatter, Namespace
 import textwrap
 import subprocess
 import uvicorn as server
-from modules.api.views import api
+from fastapi import FastAPI
+from modules.face_detection.views import route
+
+
+app = FastAPI(description="Application for face detection")
 
 
 class Commands(ArgumentParser):
@@ -10,15 +14,15 @@ class Commands(ArgumentParser):
         """
     -------------------------------------------------------------
     This application is done for detecting face using an endpoint
-    with FastApi backent and  React frontend 
+    with FastApi backent and  React frontend
     -------------------------------------------------------------
     """
     )
 
     formatter_class: object = RawDescriptionHelpFormatter
     prefix_chars: str = '--'
-    host: str = 'localhost'
-    port: int = 8000
+    host: str
+    port: int
 
     def __init__(self) -> None:
         super().__init__(description=self.description,
@@ -28,16 +32,45 @@ class Commands(ArgumentParser):
         match (action.option):
             case ('runserver'):  # Run server
                 if action.settings == 'production':
-                    from project.settings.production import app
+                    from project.settings.production import (
+                        GZipMiddleware, CORSMiddleware,
+                        TrustedHostMiddleware, CREDENTIALS, ORIGINS, METHODS,
+                        HEADERS, HASH_KEY, HOST_APP, PORT_APP,
+                    )
+
+                    app.debug = False
+                    self.host = HOST_APP
+                    self.port = PORT_APP
+                    app.add_middleware(
+                        GZipMiddleware, CORSMiddleware, TrustedHostMiddleware,
+                        allow_origins=ORIGINS,
+                        allow_methods=METHODS,
+                        allow_credentials=CREDENTIALS,
+                        allow_headers=HEADERS
+                    )
+
                 else:
-                    from project.settings.develop import app
+                    from project.settings.develop import (
+                        CORSMiddleware, HEADERS, ORIGINS, CREDENTIALS, METHODS, HOST_APP, PORT_APP
+                    )
+                    app.debug = True
+                    self.host = HOST_APP
+                    self.port = PORT_APP
+                    app.add_middleware(
+                        CORSMiddleware,
+                        allow_origins=ORIGINS,
+                        allow_methods=METHODS,
+                        allow_credentials=CREDENTIALS,
+                        allow_headers=HEADERS
+                    )
 
                 if action.host:
                     self.host = action.host
                 if action.port:
                     self.port = action.port
 
-                app.include_router(router=api,prefix="/",tags=["Websocket"])
+                app.include_router(router=route, prefix="/ws",
+                                   tags=["Websocket"])
                 print("[+] Runing server...")
                 server.run('manage:app', host=self.host,
                            port=self.port, reload=True)

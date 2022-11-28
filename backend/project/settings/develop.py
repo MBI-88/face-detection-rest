@@ -1,19 +1,5 @@
-import base
-from fastapi import FastAPI
+from .base import CORSMiddleware, HEADERS, ORIGINS, CREDENTIALS, METHODS, HASH_KEY
 
-# Develop settings
-
-app = FastAPI(debug=True)
-
-# Middleware
-
-app.add_middleware(
-    base.CORSMiddleware,
-    allow_headers=base.HEADERS,
-    allow_methods=base.METHODS,
-    allow_origins=base.ORIGINS,
-    allow_credentials=base.CREDENTIALS
-)
 
 # HOST APP
 

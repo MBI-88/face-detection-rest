@@ -1,10 +1,13 @@
-from fastapi import FastAPI
-import base
+from .base import (
+    get_config, GZipMiddleware, CORSMiddleware,
+    TrustedHostMiddleware, CREDENTIALS, METHODS,
+    HEADERS
+)
 
 
-# Settings 
+# Settings
 
-settings = base.get_config()
+settings = get_config()
 
 # Hash password
 
@@ -22,20 +25,5 @@ HOST_APP = settings.HOST_APP
 
 PORT_APP = settings.PORT_APP
 
-# App 
-
-app = FastAPI(debug=settings.DEBUG,description="Rest application for detection of faces")
-
-# Middleware
-
-app.add_middleware(
-    base.CORSMiddleware, 
-    base.TrustedHostMiddleware,
-    base.GZipMiddleware,
-    allow_headers=base.HEADERS,
-    allow_methods=base.METHODS,
-    allow_origins=base.ORIGINS,
-    allow_credentials=base.CREDENTIALS
-)
 
 # Data base

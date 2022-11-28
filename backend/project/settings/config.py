@@ -1,8 +1,6 @@
 from pydantic import BaseSettings
-from typing import List
 
 # Extract env variables
-
 
 class BaseEnv(BaseSettings):
     ORIGINS: str

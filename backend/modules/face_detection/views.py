@@ -5,11 +5,11 @@ from .socket_tools import recive_data, send_data, cv2, np
 from asyncio import create_task, Queue
 
 
-api = APIRouter()
+route = APIRouter()
 
 
 # Routes
-@api.websocket("/face-detection")
+@route.websocket("/face-detection")
 async def websocket(websocket: WebSocket) -> None:
     await websocket.accept()
     queue: Queue = Queue.get(maxsize=10)
@@ -22,7 +22,7 @@ async def websocket(websocket: WebSocket) -> None:
         await websocket.close()
 
 
-@api.on_event('startup')
+@route.on_event('startup')
 async def load_model() -> None:
     global face_model, age_model, gender_model, age_gender_image
     face_model = cv2.dnn.readNetFromCaffe('deploy.prototxt','res10_300x300_ssd_iter_140000.caffemodel')
