@@ -33,8 +33,3 @@ async def load_model() -> None:
                                             "/var/www/html/face-detection-rest/backend/face_models/gender_net.caffemodel")
     age_gender_image = np.load("/var/www/html/face-detection-rest/backend/face_models/average_face.npy")
 
-
-@route.get('/hola')
-async def get_hola() -> Response:
-    return {"message":'Hola mundo'}
-
