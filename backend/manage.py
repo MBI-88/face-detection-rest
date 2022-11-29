@@ -1,4 +1,4 @@
-from argparse import ArgumentParser, RawDescriptionHelpFormatter, Namespace
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
 import textwrap
 import subprocess
 import uvicorn as server
@@ -6,100 +6,26 @@ from fastapi import FastAPI
 from modules.face_detection.views import route
 
 
+# Application
+
 app = FastAPI(description="Application for face detection")
 
+app.include_router(router=route, prefix="/ws",
+                   tags=["Websocket"])
 
-class Commands(ArgumentParser):
-    description: str | None = textwrap.dedent(
-        """
+
+if __name__ == "__main__":
+    command = ArgumentParser(
+        description=textwrap.dedent(
+            """
     -------------------------------------------------------------
     This application is done for detecting face using an endpoint
     with FastApi backent and  React frontend
     -------------------------------------------------------------
     """
+        ), prefix_chars='--', formatter_class=RawDescriptionHelpFormatter
     )
-
-    formatter_class: object = RawDescriptionHelpFormatter
-    prefix_chars: str = '--'
-    host: str
-    port: int
-
-    def __init__(self) -> None:
-        super().__init__(description=self.description,
-                         formatter_class=self.formatter_class, prefix_chars=self.prefix_chars)
-
-    def exec_commands(self, action: Namespace) -> None:
-        match (action.option):
-            case ('runserver'):  # Run server
-                if action.settings == 'production':
-                    from project.settings.production import (
-                        GZipMiddleware, CORSMiddleware,
-                        TrustedHostMiddleware, CREDENTIALS, ORIGINS, METHODS,
-                        HEADERS, HASH_KEY, HOST_APP, PORT_APP,
-                    )
-
-                    app.debug = False
-                    self.host = HOST_APP
-                    self.port = PORT_APP
-                    app.add_middleware(
-                        GZipMiddleware, CORSMiddleware, TrustedHostMiddleware,
-                        allow_origins=ORIGINS,
-                        allow_methods=METHODS,
-                        allow_credentials=CREDENTIALS,
-                        allow_headers=HEADERS
-                    )
-
-                else:
-                    from project.settings.develop import (
-                        CORSMiddleware, HEADERS, ORIGINS, CREDENTIALS, METHODS, HOST_APP, PORT_APP
-                    )
-                    app.debug = True
-                    self.host = HOST_APP
-                    self.port = PORT_APP
-                    app.add_middleware(
-                        CORSMiddleware,
-                        allow_origins=ORIGINS,
-                        allow_methods=METHODS,
-                        allow_credentials=CREDENTIALS,
-                        allow_headers=HEADERS
-                    )
-
-                if action.host:
-                    self.host = action.host
-                if action.port:
-                    self.port = action.port
-
-                app.include_router(router=route, prefix="/ws",
-                                   tags=["Websocket"])
-                print("[+] Runing server...")
-                server.run('manage:app', host=self.host,
-                           port=self.port, reload=True)
-
-            case ('tests'):  # Test mode
-                if action.file:
-                    print("[+] Runing tests...")
-                    subprocess.run(['pytest', f"{action.file}"])
-                else:
-                    print("[-] File not found")
-
-            case ('database'):  # Database mode
-                print(
-                    f"[-] This project don't use database action taken {action.option}")
-
-            case ('shell'):  # Shell mode
-                print("[+] Runing shell...")
-                if action.file:
-                    subprocess.run(['python', f"< {action.file}"])
-                subprocess.run(["python"])
-
-            case _:
-                print("[-] Command not reconized")
-                exit(0)
-
-
-if __name__ == "__main__":
-    command = Commands()
-    command.add_argument('option', type=str, nargs='?',
+    command.add_argument('argument', type=str, nargs='?',
                          help="""run test shell database""")
     command.add_argument('-s', '--settings', type=str,
                          help="Import local settings to run the application")
@@ -109,4 +35,81 @@ if __name__ == "__main__":
                          help="Host to run the application")
     command.add_argument('-f', '--file', type=str,
                          help="File to open in shell")
-    command.exec_commands(command.parse_args())
+    selection = command.parse_args()
+
+    match (selection.argument):
+        case ('runserver'):
+            # Run server
+
+            if selection.settings == 'production':
+                from project.settings.production import (
+                    TrustedHostMiddleware, GZipMiddleware,
+                    CORSMiddleware, HEADERS, ORIGINS, HOST_APP, PORT_APP,
+                    CREDENTIALS, DEBUG, METHODS, ALLOWED_HOSTS
+                )
+
+                app.debug = DEBUG
+                host = HOST_APP
+                port = PORT_APP
+
+                # Production Middleware
+
+                app.add_middleware(CORSMiddleware, allow_headers=HEADERS, allow_origins=ORIGINS,
+                                   allow_credentials=CREDENTIALS, allow_methods=METHODS)
+                app.add_middleware(TrustedHostMiddleware,
+                                   allowed_hosts=ALLOWED_HOSTS)
+                app.add_middleware(GZipMiddleware, minimum_size=1000)
+
+            else:
+                from backend.project.settings.develop import (
+                    CORSMiddleware, ORIGINS, CREDENTIALS, METHODS, HEADERS,
+                    HOST_APP, PORT_APP, ALLOWED_HOSTS, DEBUG)
+
+                app.debug = DEBUG
+                host = HOST_APP
+                port = PORT_APP
+
+                # Develop middleware
+
+                app.add_middleware(CORSMiddleware, allow_headers=HEADERS, allow_origins=ORIGINS,
+                                   allow_credentials=CREDENTIALS, allow_methods=METHODS)
+
+            if selection.host:
+                host = selection.host
+            if selection.port:
+                port = selection.port
+
+            print(f"[+] Runing server debug mode {app.debug}")
+            server.run('manage:app', host=host,
+                       port=port, reload=True)
+
+        case ('tests'):
+            # Test mode
+
+            if selection.file:
+                print("[+] Runing tests...")
+                subprocess.run(['pytest', f"{selection.file}"])
+                
+            else:
+                print("[-] File not found")
+
+        case ('database'):
+            # Database mode
+
+            print(
+                f"[-] This project don't use database action taken {selection.argument}")
+
+        case ('shell'):
+            # Shell mode
+
+            print("[+] Runing shell...")
+            if selection.file:
+                subprocess.run(['python', f"< {selection.file}"])
+                
+            subprocess.run(["python"])
+
+        case _:
+            # Default
+
+            print("[-] Command not reconized")
+            exit(0)

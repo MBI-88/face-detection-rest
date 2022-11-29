@@ -9,6 +9,8 @@ class BaseEnv(BaseSettings):
     DEBUG: bool
     PORT_APP: int
     HOST_APP: str
+    METHODS: str
+    ALLOW_HOSTS: str
 
     class Config:
         env_file = '.env_backend'
