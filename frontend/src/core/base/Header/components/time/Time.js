@@ -23,8 +23,7 @@ const Time = () => {
   return (
     <motion.h1
       className="navbar-brand mb-0 text-center fs-2"
-      initial={{ color: '#ffff00f5' }}
-      animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease-out' }}
+      animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
       transition={{ duration: 10, repeat: Infinity, delay: 1 }}
     >
       {time.hours}:{time.minutes}:{time.seconds}

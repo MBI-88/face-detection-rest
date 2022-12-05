@@ -1,0 +1,25 @@
+.card-weather {
+    position: absolute;
+    z-index: 999;
+    left: 68%;
+    top: 60px;
+    background-color: #aae1ed;
+}
+
+@media (768px <= width <= 1024px) {
+    .card-weather {
+        left: 48%;
+    }
+}
+
+@media (425px <= width <= 768px) {
+    .card-weather {
+        left: 30%;
+    }
+}
+
+@media (320px <= width <= 425px) {
+    .card-weather {
+        left: 0%;
+    }
+}
