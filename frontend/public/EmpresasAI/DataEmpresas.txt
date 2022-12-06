@@ -1,0 +1,58 @@
+TextStyleBrush es el nombre que recibe el nuevo proyecto de Facebook AI. 
+Se trata de una inteligencia artificial que puede copiar el estilo de un texto encontrando en una fotografía.
+Lo que sin duda la hace impresionante con respecto a otras inteligencias artificiales similares es la poca cantidad 
+de datos que requiere para ello: apenas unas cuantas letras provenientes de una palabra. 
+Es decir, un teóricamente podría escribir su nombre y la IA sabría imitar su escritura.
+
+Facebook explica que si bien la mayoría de sistemas on IA pueden hacer esto con tareas específicas,
+en este caso TextStyleBrush es lo suficientemente flexible para entender todo tipo de tipografías de entornos reales. 
+Es decir, que comprende sin aparentes problemas textos con todo tipo de caligrafías, estilos aplicados, grosores, colores, 
+sombreados o rotaciones.
+
+Indican que para conseguir esto su inteligencia artificial trata de comprender la tipografía que analiza desde un punto de vista
+más holístico y teniendo en cuenta cómo es en su plenitud. Generalmente las IAs que imitan la escritura buscan parámetros concretos 
+como las serifas o el grosor, no en este caso, que trata de comprender la escritura más como un conjunto.
+
+
+
+BERT, en pocas palabras, es el siguiente paso de Google Search. Usando inteligencia artificial, 
+Google quiere que su buscador no solo reconozca los términos clave de una búsqueda, sino que entienda su contexto. 
+Porque la palabra "cambiar" tiene diferentes acepciones y no es lo mismo cambiar cromos que cambiar una rueda. 
+Esta tecnología, según nos ha explicado Pandu Nayak, VP de Google Search, llegará a lo largo de la semana en más de 70 idiomas, 
+español incluido, así que vamos a ver cómo funciona y en qué consiste.
+
+
+
+En 2020, OpenAI presentó una inteligencia artificial llamada GPT-3, que tenía tal dominio del lenguaje que era asombroso. 
+Podía generar frases convincentes, hablar con humanos e incluso autocompletar código. GPT-3 también es enorme en cuanto a su escala,
+más grande que cualquier otra red neuronal jamás construida. Inició una nueva tendencia en la Inteligencia Artificial,
+en la que se generan modelos enormes.
+
+
+
+
+El punto de partida de la tecnología DLSS (Deep Learning Super Sampling) es muy diferente al de las 
+técnicas de escalado espacial que utilizamos actualmente. 
+Dejando a un lado los detalles más complicados derivados de la forma en que NVIDIA ha 
+implementado esta innovación, lo que nos interesa saber es que DLSS trabaja con un búfer 
+temporal que permite al algoritmo de reconstrucción acceder a 
+los tres fotogramas previos al que es necesario reconstruir
+También utiliza unos objetos matemáticos conocidos como vectores de movimiento que 
+sirven para describir el desplazamiento de los elementos que cambian de posición al 
+comparar dos fotogramas consecutivos. Una vez que se ha recabado toda esta información el motor
+de inferencia la recoge y la procesa utilizando técnicas de aprendizaje profundo con el propósito de
+reconstruir una nueva imagen que incorpore el máximo nivel de detalle posible.
+
+
+
+
+El sistema Fusion Marketing de Oracle, como se llama el producto anunciado el lunes, 
+usa inteligencia artificial para armar automáticamente campañas de marketing y determinar
+si las personas que interactúan con correos electrónicos o anuncios podrían eventualmente comprar un producto, 
+enviando su información de contacto a los equipos de ventas.
+
+Para hacerlo, el sistema toma datos de una variedad de fuentes. 
+Algunos de los datos, como las listas de contactos de correo electrónico, 
+provendrán de los clientes de Oracle que utilizan el sistema. 
+Otros provendrán de mercados masivos de datos de terceros que Oracle ha
+ adquirido en los últimos años para hacer crecer su negocio de publicidad digital.
