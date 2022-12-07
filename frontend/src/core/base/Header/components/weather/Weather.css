@@ -1,9 +1,13 @@
 .card-weather {
     position: absolute;
     z-index: 999;
-    left: 68%;
+    left: 78%;
     top: 60px;
-    background-color: #aae1ed;
+    background-color: #2c1338;
+}
+
+.text-color {
+    color: aliceblue;
 }
 
 @media (768px <= width <= 1024px) {

@@ -6,3 +6,22 @@
 ul {
     list-style: none;
 }
+
+.social-link {
+    height: 150%;
+    width: 150%;
+    color: #0598f3;
+    padding-top: 5%;
+
+}
+
+.develop-style {
+    color: #0598f3;
+    height: 150%;
+    width: 150%;
+}
+
+.develop-name {
+    color: #0598f3;
+}
+

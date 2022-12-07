@@ -15,8 +15,11 @@ const Header = () => (
       >
         AI
       </motion.h1>
-      <Time />
-      <Weather />
+      <div className='d-flex g-2'>
+        <Time />
+        <Weather />
+      </div>
+
     </div>
   </nav>
 )

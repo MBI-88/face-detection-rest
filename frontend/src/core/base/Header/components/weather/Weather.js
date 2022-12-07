@@ -36,14 +36,14 @@ const Weather = () => {
   }
 
   useEffect(() => {
-    if (longitude !== null && latitude !== null){
+    if (longitude !== null && latitude !== null) {
       apiWeather(longitude, latitude)
-      .then(response => response.json())
-      .then(result => {
-        setData(result)
-      })
+        .then(response => response.json())
+        .then(result => {
+          setData(result)
+        })
     }
-  },[longitude, latitude])
+  }, [longitude, latitude])
 
   return (
     <>
@@ -60,32 +60,31 @@ const Weather = () => {
       <AnimatePresence>
         {
           !show && data &&
-          (<motion.div
-            className='rounded-5 shadow p-2 card-weather m-2'
-            initial={{ top: '-400px' }}
-            animate={{ top: '60px' }}
+          (<motion.section
+            className='rounded-5 shadow p-2 card-weather m-2 text-center'
+            initial={{ top: '-450px', display: 'none' }}
+            animate={{ top: '60px', display: 'block' }}
             transition={{ duration: 1.2 }}
             exit={{ top: '-450px' }}
             onMouseEnter={handlerMouseIn}
             onMouseLeave={handlerMouseOut}
           >
-            <section className='container-fluid text-center'>
-              <img className="card-img-top w-25 h-25" src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="..." loading='lazy' />
-              <div className="card-body">
-                <p className="card-title text-start pb-2">{data.name}</p>
-                <article className="card-text text-start">
-                  <p>Temperature: {data.main.temp} C° </p>
-                  <p>Feel like: {data.main.feels_like} C°</p>
-                  <p>Min: {data.main.temp_min} C°</p>
-                  <p>Max: {data.main.temp_max} C°</p>
-                  <p>Pressure: {data.main.pressure} hPa</p>
-                  <p>Humidity: {data.main.humidity} HR</p>
-                  <p>Wind speed: {data.wind.speed} Km/h</p>
-                  <p>Description: {data.weather[0].description}</p>
-                </article>
-              </div>
-            </section>
-          </motion.div>)
+            <img className="card-img-top w-25 h-25" src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="..." loading='lazy' />
+            <div className="card-body">
+              <p className="card-title text-start pb-2 text-color">{data.name}</p>
+              <article className="card-text text-start">
+                <p className='text-color'>Temperature: {data.main.temp} C° </p>
+                <p className='text-color'>Feel like: {data.main.feels_like} C°</p>
+                <p className='text-color'>Min: {data.main.temp_min} C°</p>
+                <p className='text-color'>Max: {data.main.temp_max} C°</p>
+                <p className='text-color'>Pressure: {data.main.pressure} hPa</p>
+                <p className='text-color'>Humidity: {data.main.humidity} HR</p>
+                <p className='text-color'>Wind speed: {data.wind.speed} Km/h</p>
+                <p className='text-color'>Description: {data.weather[0].description}</p>
+              </article>
+            </div>
+
+          </motion.section>)
         }
       </AnimatePresence>
     </>

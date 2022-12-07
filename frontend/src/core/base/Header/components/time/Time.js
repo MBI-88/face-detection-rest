@@ -16,8 +16,6 @@ const Time = () => {
     })
   }, 1000)
 
-
-
   return (
     <motion.h1
       className="navbar-brand text-end fs-1"

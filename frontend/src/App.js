@@ -7,10 +7,11 @@ import Body from './core/modules/Body/Body';
 const App = () => {
   
   return (
-    <>
+    <main>
     <Header />
+    <Body />
     <Footer />
-    </>
+    </main>
   )
 }
 

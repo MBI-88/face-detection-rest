@@ -1,80 +1,128 @@
 import './Footer.css';
-import { BsFacebook, BsMicrosoft, BsApple } from 'react-icons/bs';
+import { BsFacebook, BsMicrosoft, BsApple, BsLinkedin } from 'react-icons/bs';
 import { FaGooglePlusG } from 'react-icons/fa';
 import { GrOracle } from 'react-icons/gr';
 import { SiNvidia } from 'react-icons/si';
 import { HiExternalLink } from 'react-icons/hi';
+import { DiGithubAlt } from 'react-icons/di'
+import { SiGmail } from 'react-icons/si'
 
 
-const Footer = () => {
-  const facebookIcoStyle = {
+const Footer = () => (
 
-  }
-  const googleIcoStyle = {}
-  const microsoftIcoStyle = {}
-  const oracleIcoStyle = {}
-  const appleIcoStyle = {}
-  const nvidiaIcoStyle = {}
+  <footer className='background-footer'>
+    <section className='container p-5'>
+      <div className='container-fluid d-flex g-2 g-lg-5 flex-row '>
+        <article className='ps-lg-5 ps-3'>
+          <ul>
+            <li className='nav-item'>
+              <a href='#' className='nav-link'>
+                <BsFacebook className='social-link' />
+              </a>
+            </li>
+            <li className='nav-item'>
+              <a href='#' className='nav-link'>
+                <FaGooglePlusG className='social-link' />
 
-  return (
-    <footer className='background-footer'>
-      <section className='container'>
-        <div className='container d-flex g-sm-1 g-lg-5'>
-          <article className='container p-5 text-start'>
-            <ul>
-              <li className='nav-item'>
-                <a href='#' className='nav-link'>
-                  <BsFacebook style={facebookIcoStyle} />
-                </a>
-              </li>
-              <li className='nav-item'>
-                <a href='#' className='nav-link'>
-                  <FaGooglePlusG />
+              </a>
+            </li>
+            <li className='nav-item'>
+              <a href='#' className='nav-link'>
+                <BsMicrosoft className='social-link' />
+              </a>
 
-                </a>
-              </li>
-              <li className='nav-item'>
-                <a href='#' className='nav-link'>
-                  <BsMicrosoft />
-                </a>
+            </li>
 
-              </li>
-              <li className='nav-item'>
-                <a href='#' className='nav-link'>
-                  <GrOracle />
-                </a>
+          </ul>
+        </article>
 
-              </li>
+        <article className='ps-lg-5 ps-3'>
+          <ul>
+            <li className='nav-item'>
+              <a href='#' className='nav-link'>
+                <GrOracle className='social-link' />
+              </a>
 
-              <li className='nav-item'>
-                <a href='#' className='nav-link'>
-                  <SiNvidia />
-                </a>
+            </li>
 
-              </li>
+            <li className='nav-item'>
+              <a href='#' className='nav-link'>
+                <SiNvidia className='social-link' />
+              </a>
 
-              <li className=' nav-item'>
-                <a href='#' className='nav-link'>
-                  <BsApple />
-                </a>
+            </li>
 
-              </li>
-            </ul>
-          </article>
+            <li className=' nav-item'>
+              <a href='#' className='nav-link'>
+                <BsApple className='social-link' />
+              </a>
+            </li>
+          </ul>
+        </article>
 
-          <article className='container p-5 text-end'>
-            <h1>API</h1>
-          </article>
-        </div>
+        <article className='ps-lg-5 ps-3'>
+          <ul>
+            <li className=' nav-item'>
+              <a href='#'>
+                <HiExternalLink className='social-link' />
+              </a>
+            </li>
+            <li className=' nav-item'>
+              <a href='#'>
+                <HiExternalLink className='social-link' />
+              </a></li>
+            <li className=' nav-item'>
+              <a href='#'>
+                <HiExternalLink className='social-link' />
+              </a></li>
+            <li className=' nav-item'>
+              <a href='#'>
+                <HiExternalLink className='social-link' />
+              </a></li>
+          </ul>
+        </article>
+      </div>
 
-      </section>
+    </section>
 
-      <section className='container p-5 text-center'>
-        <h1>MBIMBIMBIMB</h1>
-      </section>
+    <section className='p-lg-5 p-sm-1 text-center '>
+      <div className='d-inline-flex g-lg-2 align-content-center flex-row'>
+        <h1 className='develop-name'>MBI | </h1>
+        <ul className='d-flex ps-0 flex-row align-items-center'>
+          <li className='nav-item ps-lg-5 ps-3'>
+            <a href='https://www.facebook.com/IngMBI8807/' className='nav-link'>
+              <BsFacebook className='develop-style' />
+            </a>
+          </li>
+          <li className='nav-item ps-lg-5 ps-3'>
+            <a href='https://www.linkedin.com/in/mbi-bi/' className='nav-link'>
+              <BsLinkedin className='develop-style' />
+            </a>
+          </li>
+          <li className='nav-item ps-lg-5 ps-3'>
+            <a href='https://github.com/MBI-88/' className='nav-link'>
+              <DiGithubAlt className='develop-style' />
+            </a>
+          </li>
+          <li className='nav-item ps-lg-5 ps-3'>
+            <a href='https://porfoliombi.netlify.app/' className='nav-link'>
+              <HiExternalLink className='develop-style' />
+            </a>
+          </li>
+          <li className='nav-item ps-lg-5 ps-3'>
+            <a href='mailto:ingmbi8807@gmail.com'>
+              <SiGmail className='develop-style' />
+            </a>
+          </li>
+        </ul>
 
-    </footer>
-  )
-}
+      </div>
+    </section>
+
+  </footer>
+)
+
+
+
 
 export default Footer
