@@ -1,11 +1,13 @@
 import './Body.css'
+import Header from './components/header/Header'
 
 const Body = () => {
-  return (
-    <div className='container text-center'>
-      <h1>Cuerpo del modelo</h1>
 
-    </div>
+  return (
+    <section className=' mt-5 mb-5'>
+         <Header />
+
+    </section>
   )
 }
 

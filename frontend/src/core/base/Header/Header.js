@@ -6,14 +6,14 @@ import { motion } from 'framer-motion'
 
 
 const Header = () => (
-  <nav className="navbar bg-transparent align-content-center">
+  <nav className="navbar bag-nav  shadow">
     <div className="container-fluid">
       <motion.h1
         className="navbar-brand text-start fs-1"
         animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
         transition={{ duration: 10, repeat: Infinity, delay: 1 }}
       >
-        AI
+        Ai
       </motion.h1>
       <div className='d-flex g-2'>
         <Time />
