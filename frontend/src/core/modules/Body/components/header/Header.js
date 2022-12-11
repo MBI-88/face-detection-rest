@@ -169,7 +169,7 @@ const Header = () => {
 
                     </motion.ul>
 
-                    <img src='/assets/recuento/header2.jpg' className=' img-fluid' alt='...' />
+                    <img src='/assets/recuento/header2.png' className=' img-fluid w-50' alt='...' />
                 </div>
 
             </div>

@@ -1,0 +1,39 @@
+.facebook-bg {
+    background: #295396;
+}
+
+.facebook-bg>h4 {
+    color: azure;
+}
+
+.oracle-bg {
+    background: #f00107;
+}
+
+.oracle-bg>h4 {
+    color: azure;
+}
+
+.nvidia-bg {
+    background: #000000;
+}
+
+.nvidia-bg>h4 {
+    color: azure;
+}
+
+.openai-bg {
+    background: #000000;
+}
+
+.openai-bg>h4 {
+    color: azure;
+}
+
+.microsoft-bg {
+    background: #000000;
+}
+
+.microsoft-bg>h4 {
+    color: azure;
+}

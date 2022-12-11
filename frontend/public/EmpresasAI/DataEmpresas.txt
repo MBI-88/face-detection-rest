@@ -55,4 +55,4 @@ Para hacerlo, el sistema toma datos de una variedad de fuentes.
 Algunos de los datos, como las listas de contactos de correo electrónico, 
 provendrán de los clientes de Oracle que utilizan el sistema. 
 Otros provendrán de mercados masivos de datos de terceros que Oracle ha
- adquirido en los últimos años para hacer crecer su negocio de publicidad digital.
+adquirido en los últimos años para hacer crecer su negocio de publicidad digital.

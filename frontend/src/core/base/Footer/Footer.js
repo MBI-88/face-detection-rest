@@ -12,21 +12,21 @@ const Footer = () => (
 
   <footer className='background-footer'>
     <section className='container p-5'>
-      <div className='container-fluid d-flex g-2 g-lg-5 flex-row '>
+      <div className='d-flex gap-4 gap-lg-5 flex-row'>
         <article className='ps-lg-5 ps-3'>
           <ul>
-            <li className='nav-item'>
+            <li className='nav-item mb-4'>
               <a href='#' className='nav-link'>
                 <BsFacebook className='social-link' />
               </a>
             </li>
-            <li className='nav-item'>
+            <li className='nav-item mb-4'>
               <a href='#' className='nav-link'>
                 <FaGooglePlusG className='social-link' />
 
               </a>
             </li>
-            <li className='nav-item'>
+            <li className='nav-item mb-4'>
               <a href='#' className='nav-link'>
                 <BsMicrosoft className='social-link' />
               </a>
@@ -38,47 +38,25 @@ const Footer = () => (
 
         <article className='ps-lg-5 ps-3'>
           <ul>
-            <li className='nav-item'>
+            <li className='nav-item mb-4'>
               <a href='#' className='nav-link'>
                 <GrOracle className='social-link' />
               </a>
 
             </li>
 
-            <li className='nav-item'>
+            <li className='nav-item mb-4'>
               <a href='#' className='nav-link'>
                 <SiNvidia className='social-link' />
               </a>
 
             </li>
 
-            <li className=' nav-item'>
+            <li className=' nav-item mb-4'>
               <a href='#' className='nav-link'>
                 <BsApple className='social-link' />
               </a>
             </li>
-          </ul>
-        </article>
-
-        <article className='ps-lg-5 ps-3'>
-          <ul>
-            <li className=' nav-item'>
-              <a href='#'>
-                <HiExternalLink className='social-link' />
-              </a>
-            </li>
-            <li className=' nav-item'>
-              <a href='#'>
-                <HiExternalLink className='social-link' />
-              </a></li>
-            <li className=' nav-item'>
-              <a href='#'>
-                <HiExternalLink className='social-link' />
-              </a></li>
-            <li className=' nav-item'>
-              <a href='#'>
-                <HiExternalLink className='social-link' />
-              </a></li>
           </ul>
         </article>
       </div>
@@ -86,7 +64,7 @@ const Footer = () => (
     </section>
 
     <section className='p-lg-5 p-sm-1 text-center '>
-      <div className='d-inline-flex g-lg-2 align-content-center flex-row'>
+      <div className='d-inline-flex gap-lg-2 align-content-center flex-row'>
         <h1 className='develop-name'>MBI | </h1>
         <ul className='d-flex ps-0 flex-row align-items-center'>
           <li className='nav-item ps-lg-5 ps-3'>
