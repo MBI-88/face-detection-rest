@@ -1,4 +1,4 @@
-import './Article.css'
+import './Article1.css'
 import { motion } from 'framer-motion';
 
 
