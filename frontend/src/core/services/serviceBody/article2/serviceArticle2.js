@@ -1,15 +1,31 @@
-const Url = process.env.REACT_APP_API_FACE_DETECTION_1
-const Key = process.env.REACT_APP_FACE_DETECTION_1_KEY
+const UrlDetect = process.env.REACT_APP_API_GOOGLE_DETECT
+const UrlTranst = process.env.REACT_APP_API_GOOGLE_TRANSLATE
+const Key = process.env.REACT_APP_GOOGLE_KEY
 
-export const apiFaceDetection1 = (body) => {
+export const apiGoogleDetect = (body) => {
     const options = {
         method: 'POST',
         headers: {
-            'content-type': 'application/json',
+            'content-type': 'application/x-www-form-urlencoded',
+            'Accept-Encoding': 'application/gzip',
             'X-RapidAPI-Key': `${Key}`,
-            'X-RapidAPI-Host': 'face-detection6.p.rapidapi.com'
+            'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
         },
-        body: `${body}`
+        body: body,
     };
-    return fetch(Url, options)
+    return fetch(UrlDetect, options)
+}
+
+export const apiGoogleTranslate = (body) => {
+    const options = {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Accept-Encoding': 'application/gzip',
+            'X-RapidAPI-Key': `${Key}`,
+            'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+        },
+        body: body
+    }
+    return fetch(UrlTranst,options)
 }
