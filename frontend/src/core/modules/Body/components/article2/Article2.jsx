@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { article2DataDetect, article2DataTrans } from "../../../../interfaces/Body/article2/article2Interface";
 import { apiGoogleDetect, apiGoogleTranslate } from "../../../../services/serviceBody/article2/serviceArticle2";
 import { useState, useEffect, useRef } from "react";
-
+import './Article2.css'
 
 const Article2 = () => {
   const [dataDetect, setDetect] = useState(article2DataDetect)
@@ -65,7 +65,7 @@ const Article2 = () => {
   }, [send])
 
   return (
-    <section className="container">
+    <section className="container mb-5">
       <motion.h1
         className="container-fluid fs-2 text-start pt-5 pb-3"
         animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
@@ -140,9 +140,14 @@ const Article2 = () => {
             </div>
 
             <div className="container mt-5 mb-4">
-              <textarea className="form-control mt-1 mb-1"
-                value={dataTrans} readOnly rows="8" cols="3" placeholder="Write here...">
-              </textarea>
+              {
+                dataTrans.data.translations.map(item => (
+                  <textarea className="form-control mt-1 mb-1" key="source"
+                    value={item[0].translatedText ? item[0].translatedText: 'Watting...'} readOnly rows="8" cols="3" placeholder="Write here...">
+                  </textarea>
+                ))
+              }
+
               <div className="d-flex align-items-center gap-2 mt-2">
                 <select className="form-control w-50" ref={paramsSelectTarget}>
                   <option value="">--Target language--</option>

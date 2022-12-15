@@ -15,7 +15,7 @@ const Header = () => (
       >
         Ai
       </motion.h1>
-      <div className='d-flex g-2'>
+      <div className='d-flex gap-2'>
         <Time />
         <Weather />
       </div>

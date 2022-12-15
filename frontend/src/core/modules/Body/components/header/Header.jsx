@@ -94,7 +94,7 @@ const Header = () => {
 
 
     return (
-        <article className='background-header mb-5 shadow'>
+        <article className='background-header shadow'>
             <div className=' d-flex flex-row align-items-center'>
                 <img src='/assets/recuento/header.png' className=' img-fluid w-25' alt='...' loading='lazy' />
                 <div className='image-2'>

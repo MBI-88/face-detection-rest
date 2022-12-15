@@ -1,0 +1,9 @@
+.background {
+    height: 50rem;
+    z-index: -10;
+    background: url('/var/www/html/face-detection-rest/frontend/public/assets/recuento/header2.png') no-repeat center;
+}
+
+.text-color>h3 {
+    color: aliceblue;
+}

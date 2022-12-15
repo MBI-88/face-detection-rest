@@ -15,6 +15,14 @@ export const article2DataDetect = {
 
 
 export const article2DataTrans = {
-
+    "data":{
+        "translations":[
+            [
+                {
+                    "translatedText": ''
+                }
+            ]
+        ]
+    }
 
 }
