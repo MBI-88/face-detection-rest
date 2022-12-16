@@ -2,6 +2,7 @@ import './Body.css'
 import Article1 from './components/article1/Article1'
 import Article2 from './components/article2/Article2'
 import Article3 from './components/article3/Article3'
+import Article4 from './components/article4/Article4'
 import Header from './components/header/Header'
 
 const Body = () => {
@@ -12,6 +13,7 @@ const Body = () => {
       <Article1 />
       <Article2 />
       <Article3 />
+      <Article4 />
 
     </section>
   )

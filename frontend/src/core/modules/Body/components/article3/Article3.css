@@ -1,9 +1,26 @@
 .background {
-    height: 50rem;
-    z-index: -10;
-    background: url('/var/www/html/face-detection-rest/frontend/public/assets/recuento/header2.png') no-repeat center;
+    background: url('/var/www/html/face-detection-rest/frontend/public/assets/recuento/header2.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 50em;
+
 }
 
 .text-color>h3 {
     color: aliceblue;
+}
+
+@media screen and (100px <= width <=700px) {
+    .background {
+        background: url('/var/www/html/face-detection-rest/frontend/public/assets/recuento/header3_420X273.png');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 50em;
+
+    }
+ 
 }
