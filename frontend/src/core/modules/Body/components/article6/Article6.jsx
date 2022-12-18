@@ -3,10 +3,10 @@ import './Article6.css'
 
 
 const Article6 = () => (
-    <article className='article-bg mt-5 mt-5 p-4'>
+    <article className='article-bg mt-5 mt-5 mb-5 pt-3 pb-3'>
         <section className='container'>
             <motion.h1
-                className='fs-1 text-start pt-5 pb-5'
+                className='fs-1 text-start mt-5 mb-5'
                 animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
                 transition={{ duration: 10, repeat: Infinity, delay: 1 }}
             >
@@ -16,22 +16,21 @@ const Article6 = () => (
             </motion.h1>
 
             <motion.h3
-                className='fs-3 text-start mb-3'
+                className='fs-3 text-start mb-5 mt-5'
                 animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
                 transition={{ duration: 10, repeat: Infinity, delay: 1 }}
             >
                 Who is responsible for ensuring that the decisions made by AI are ethical and just?
             </motion.h3>
             <motion.p
-                className='fs-5 text-start'
+                className='fs-5 text-start p-3'
                 initial={{opacity:0}}
                 whileInView={{
                     opacity:1,
                     transition:{delay:1}
                 }}
                 whileHover={{
-                    scale:[null, 1.2],
-                    padding:'1%',
+                    scale:[null, 1.08],
                 }}
                 viewport={{ once: true }}
             >
@@ -47,7 +46,7 @@ const Article6 = () => (
             </motion.p>
 
             <motion.h3
-                className='fs-3 text-start'
+                className='fs-3 text-start mb-5 mt-5'
                 animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
                 transition={{ duration: 10, repeat: Infinity, delay: 1 }}
             >
@@ -55,15 +54,15 @@ const Article6 = () => (
             </motion.h3>
 
             <motion.p
-                className='fs-5 text-start'
+                className='fs-5 text-start p-3'
                 initial={{ opacity: 0 }}
                 whileInView={{
                     opacity: 1,
                     transition: { delay: 1 }
                 }}
                 whileHover={{
-                    scale: [null, 1.2],
-                    padding: '1%',
+                    scale: [null, 1.08],
+               
                 }}
                 viewport={{ once: true }}
             >
@@ -80,7 +79,7 @@ const Article6 = () => (
             </motion.p>
 
             <motion.h3
-                className='fs-3 text-start'
+                className='fs-3 text-start mb-5 mt-5'
                 animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
                 transition={{ duration: 10, repeat: Infinity, delay: 1 }}
             >
@@ -88,15 +87,14 @@ const Article6 = () => (
             </motion.h3>
             
             <motion.p
-                className='fs-5 text-start'
+                className='fs-5 text-start p-3'
                 initial={{ opacity: 0 }}
                 whileInView={{
                     opacity: 1,
                     transition: { delay: 1 }
                 }}
                 whileHover={{
-                    scale: [null, 1.2],
-                    padding: '1%',
+                    scale: [null, 1.08],
                 }}
                 viewport={{ once: true }}
             >

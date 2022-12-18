@@ -26,7 +26,7 @@ const Article4 = () => {
             >
                 <img className="img-fluid w-50 rounded-5"
                     src="assets/recuento/artificial-intelligence-3262753.png"
-                    alt="Image..." loading="lazy" decoding="async" onLoad={() => setIsLoaded(true)} />
+                    alt="..." loading="lazy" decoding="async" onLoad={() => setIsLoaded(true)} />
                 <div className="card-body">
                     <motion.h1 className="card-title pb-2"
                         animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
