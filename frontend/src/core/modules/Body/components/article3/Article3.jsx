@@ -179,7 +179,7 @@ const Article3 = () => {
                     </motion.li>
 
                     <motion.li
-                        initial={{ opacity: 0, y: 350 }}
+                        initial={{ opacity: 0, y: 320 }}
                         whileInView={{
                             opacity: 1,
                             y: 0,
