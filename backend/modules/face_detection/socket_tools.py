@@ -77,7 +77,7 @@ async def send_data(
 
                     list_data.append(
                         {
-                            'area': (x0, y0, x1, y1),
+                            'area': [x0, y0, x1, y1],
                             'age': age_label,
                             'age_conf': age_confidence,
                             'gender': gender_label,

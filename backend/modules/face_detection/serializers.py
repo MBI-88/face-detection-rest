@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from typing import List, Dict, Tuple
+from typing import List, Dict
 
 
 class Face(BaseModel):
     data: List[
-        Dict[str, Tuple[int, int, int, int] | str | float] | None
+        Dict[str, List[int, int, int, int] | str | float] | None
     ]
 
     class Config:
