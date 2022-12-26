@@ -5,6 +5,7 @@ import Article3 from './components/article3/Article3'
 import Article4 from './components/article4/Article4'
 import Article5 from './components/article5/Article5'
 import Article6 from './components/article6/Article6'
+import FaceDetection from './components/faceDetectionModel/FaceDetection'
 import Header from './components/header/Header'
 
 const Body = () => {
@@ -18,6 +19,7 @@ const Body = () => {
       <Article4 />
       <Article5 />
       <Article6 />
+      <FaceDetection />
 
     </section>
   )

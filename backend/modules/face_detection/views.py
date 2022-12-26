@@ -12,7 +12,7 @@ route = APIRouter()
 @route.websocket("/face-detection")
 async def websocket(websocket: WebSocket) -> None:
     await websocket.accept()
-    queue: Queue = Queue.get(maxsize=10)
+    queue: Queue = Queue(maxsize=10)
     detect_faces = create_task(send_data(websocket, queue, face_model,age_model, gender_model, age_gender_image))
     try:
         while True:

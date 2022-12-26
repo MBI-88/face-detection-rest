@@ -1,8 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import './FaceDetection.css';
 import { motion } from 'framer-motion';
-import { Stage, Layer, Rect, Image } from 'react-konva';
-import WebSocket from 'ws';
 import { dataFace } from "../../../../interfaces/Body/faceDetection/faceDetectionInterface";
 
 
@@ -10,27 +8,24 @@ const UrlWebSocket = process.env.REACT_APP_WEBSOKET
 const IMAGE_INTERVAL_MS = 42
 
 const FaceDetection = () => {
-  const [start, setStart] = useState(false)
+  const [start, setStart] = useState(null)
   const [detection, setDetection] = useState(dataFace)
   const selectCamera = useRef(null)
   const videoFrame = useRef(null)
   const imageRef = useRef(null)
   const Viedowidth = 640
   const Videoheight = 480
-  const ws = new WebSocket(UrlWebSocket)
-  let socket = null
-  const [optionCamera, setOptionCamera] = useState([])
+  let ws = null
 
-  const handleStart = (event) => {
-    event.preventDefault()
-    setStart(true)
+  const handleStart = () => {
+    setStart('start')
   }
 
-  const handleStop = () => setStart(false)
+  const handleStop = () => setStart('stop')
 
-  const startFaceDetection = (video, canvas, deviceId) => {
+  const startFaceDetection = (video, canvas, deviceId, socket) => {
     let intervalId;
-    ws.on('open', () => {
+    socket.addEventListener('open', () => {
       navigator.mediaDevices.getUserMedia({
         audio: false,
         video: {
@@ -41,56 +36,72 @@ const FaceDetection = () => {
       }).then(stream => {
         video.current.srcObject = stream
         video.current.play().then(() => {
+          canvas.current.width = video.current.viedoWidth
+          canvas.current.height = video.current.videoHeight
+
           intervalId = setInterval(() => {
-            canvas.current.image = video
-            canvas.current.toBlob({
-            }).then(blob => ws.send(blob))
+            const ctx = canvas.current.getContext('2d')
+            canvas.current.width = video.current.viedoWidth
+            canvas.current.height = video.current.videoHeight
+            ctx.drawImage(video.current, 0, 0)
+            canvas.current.toBlob(blob => console.log(blob), 'image/jpeg')
           }, IMAGE_INTERVAL_MS)
         })
       }).catch(error => alert(error))
     })
-    ws.on('message', e => {
+    socket.addEventListener('message', e => {
       setDetection(JSON.parse(e.data))
+      drawFaceRectangles(video, canvas)
     })
-    ws.on('close', () => {
+    socket.addEventListener('close', () => {
       window.clearInterval(intervalId)
-      video.pause()
+      video.current.pause()
     })
   }
 
-  const startProcess = (video, canvas) => {
-    socket = startFaceDetection(video, canvas, selectCamera.current.value)
+  const drawFaceRectangles = (video, canvas) => {
+    const ctx = canvas.current.getContext('2d')
+    ctx.width = video.current.videoWidth
+    ctx.height = video.current.videoHeight
+    ctx.beginPath()
+    ctx.clearReact(0, 0, ctx.width, ctx.height)
+    for (const [x, y, width, height] of detection[0].area) {
+      ctx.strokeStyle = '#49fb35'
+      ctx.beginPath()
+      ctx.rect(x, y, width, height)
+      ctx.strock()
+    }
+
   }
 
   useEffect(() => {
-    if (!start) {
-      navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-          for (const device of devices) {
-            if (device.kind === 'videoinput' && device.deviceId) {
-              setOptionCamera(
-                optionCamera.push({
-                  'deviceId': device.deviceId,
-                  'deviceLabel': device.label
-                })
-              )
-              //const optionElement = <option></option>
-              //optionElement.value = device.deviceId
-              //optionElement.innerText = device.label
-              //selectCamera.current.appendChild(optionElement)
-            }
-          }
-        }
-        ).catch(err => alert(err))
+    if (start === 'start') {
+      ws = new WebSocket('ws://localhost:8000/face-detection')
+      startFaceDetection(videoFrame, imageRef, selectCamera.current.value, ws)
     }
-
-
-    if (start) {
-      if (socket !== null) socket.close()
-
-      socket = startProcess(videoFrame, imageRef)
+    if (start === 'stop' && ws !== null) {
+      console.log('paso')
+      ws.close()
+    }
+    else {
+      return
     }
   }, [start])
+
+  useEffect(() => {
+    navigator.mediaDevices.enumerateDevices()
+      .then(devices => {
+        for (const device of devices) {
+          if (device.kind === 'videoinput' && device.deviceId) {
+            const deviceOption = document.createElement('option');
+            deviceOption.value = device.deviceId;
+            deviceOption.innerText = device.label;
+            selectCamera.current.appendChild(deviceOption)
+          }
+        }
+      }
+      ).catch(err => alert(err))
+  }, [])
 
   return (
     <section className="mt-5 mb-5">
@@ -103,7 +114,7 @@ const FaceDetection = () => {
         </motion.h3>
 
         <motion.div
-          className="mt-3 d-lg-flex d-block"
+          className="mt-3"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{
             opacity: 1,
@@ -113,39 +124,17 @@ const FaceDetection = () => {
           viewport={{ once: true }}
         >
           <div className="container">
-            <form id="form-connect" className="form-control">
+            <div id="form-connect" className="form-control">
               <select id="selection" ref={selectCamera}>
-                {
-                  optionCamera !== [] ? (
-                    optionCamera.map(op => (
-                      <option value={op.deviceId}>{op.deviceLabel}</option>
-                    ))
-                  ) : ("")
-                }
               </select>
-              <button className="btn btn-success" type="submit" id="start" onSubmit={e => handleStart(e)}>Start</button>
-              <button className="btn btn-close" type="submit" id="stop" onClick={handleStop}>Stop</button>
-            </form>
+              <button className="btn btn-success ms-2" type="button" id="start" onClick={handleStart}>Start</button>
+              <button className="btn btn-close ms-2" type="button" id="stop" onClick={handleStop}>Stop</button>
+            </div>
           </div>
 
           <div className="container-fluid">
             <video id="video-frame" ref={videoFrame}></video>
-            {
-              detection[0].area !== [null] ? (
-                <Stage width={Viedowidth} height={Videoheight}>
-                  <Layer>
-                    {
-                      detection.map(face => (
-                        <Rect x={face.area[0]} y={face.area[1]} width={face.area[2]} height={face.area[3]} stroke='#49fb35' />
-
-                      ))
-                    }
-                    <Image ref={imageRef} />
-                  </Layer>
-                </Stage>
-              ) : <p className="fs-5">Watting...</p>
-
-            }
+            <canvas id="canvas-detection" ref={imageRef}></canvas>
 
             <div className="d-lg-flex d-block align-items-center">
               {

@@ -18,7 +18,7 @@ face_confidence_threshold = 0.995
 async def recive_data(websocket: WebSocket, queue: Queue) -> None:
     data = await websocket.receive_bytes()
     try:
-        queue.get_nowait(data)
+        queue.put_nowait(data)
     except QueueFull:
         pass
 

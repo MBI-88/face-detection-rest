@@ -10,8 +10,7 @@ from modules.face_detection.views import route
 
 app = FastAPI(description="Application for face detection")
 
-app.include_router(router=route, prefix="/ws",
-                   tags=["Websocket"])
+app.include_router(router=route, tags=["Websocket"])
 
 
 if __name__ == "__main__":
@@ -61,7 +60,7 @@ if __name__ == "__main__":
                 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
             else:
-                from backend.project.settings.develop import (
+                from project.settings.develop import (
                     CORSMiddleware, ORIGINS, CREDENTIALS, METHODS, HEADERS,
                     HOST_APP, PORT_APP, ALLOWED_HOSTS, DEBUG)
 
