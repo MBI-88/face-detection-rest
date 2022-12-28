@@ -16,7 +16,7 @@ class Face(BaseModel):
                         'age': '25-35',
                         'age_confi': 95.0,
                         'gender': 'male',
-                        'gender_conf': 98.99
+                        'gender_confi': 98.99
                     }
                 ]
             }

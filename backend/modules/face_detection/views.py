@@ -13,7 +13,8 @@ route = APIRouter()
 async def websocket(websocket: WebSocket) -> None:
     await websocket.accept()
     queue: Queue = Queue(maxsize=10)
-    detect_faces = create_task(send_data(websocket, queue, face_model,age_model, gender_model, age_gender_image))
+    detect_faces = create_task(send_data(
+        websocket, queue, face_model, age_model, gender_model, age_gender_average_image))
     try:
         while True:
             await recive_data(websocket, queue)
@@ -24,12 +25,13 @@ async def websocket(websocket: WebSocket) -> None:
 
 @route.on_event('startup')
 async def load_model() -> None:
-    global face_model, age_model, gender_model, age_gender_image
+    global face_model, age_model, gender_model, age_gender_average_image
     face_model = cv2.dnn.readNetFromCaffe('/var/www/html/face-detection-rest/backend/face_models/deploy.prototxt',
                                           '/var/www/html/face-detection-rest/backend/face_models/res10_300x300_ssd_iter_140000.caffemodel')
     age_model = cv2.dnn.readNetFromCaffe("/var/www/html/face-detection-rest/backend/face_models/age_net_deploy.prototxt",
                                          "/var/www/html/face-detection-rest/backend/face_models/age_net.caffemodel")
     gender_model = cv2.dnn.readNetFromCaffe("/var/www/html/face-detection-rest/backend/face_models/gender_net_deploy.prototxt",
                                             "/var/www/html/face-detection-rest/backend/face_models/gender_net.caffemodel")
-    age_gender_image = np.load("/var/www/html/face-detection-rest/backend/face_models/average_face.npy")
+    age_gender_average_image = np.load(
+        "/var/www/html/face-detection-rest/backend/face_models/average_face.npy")
 
