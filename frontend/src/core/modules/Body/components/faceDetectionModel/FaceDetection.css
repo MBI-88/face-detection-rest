@@ -1,1 +1,13 @@
 
+.widthXheight {
+    width: 300px;
+    height: 300px;
+
+}
+
+@media screen and (min-width: 768px) {
+    .widthXheight {
+        width: 640px;
+        height: 480px;
+    }
+}

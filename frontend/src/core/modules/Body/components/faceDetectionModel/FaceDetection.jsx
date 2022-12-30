@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import './FaceDetection.css';
 import { motion } from 'framer-motion';
 
@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 const IMAGE_INTERVAL_MS = 60
 
 const FaceDetection = () => {
+  const [viewport, setViewport] = useState(0)
   const selectCamera = useRef()
   const videoFrame = useRef()
   const canvaRef = useRef()
@@ -21,8 +22,8 @@ const FaceDetection = () => {
           audio: false,
           video: {
             deviceId,
-            width: { max: 640 },
-            height: { max: 480 },
+            width: { max: viewport <= 784 ? 300 : 640 },
+            height: { max: viewport <= 748 ? 300 : 480 },
           }
         }).then(stream => {
           videoFrame.current.srcObject = stream
@@ -38,7 +39,7 @@ const FaceDetection = () => {
               canvasVirtual.toBlob(blob => socket.send(blob), 'image/jpeg')
             }, IMAGE_INTERVAL_MS)
           })
-        }).catch(error => console.log(error))
+        }).catch(error => alert(error))
       })
 
       socket.addEventListener('message', e => {
@@ -50,8 +51,10 @@ const FaceDetection = () => {
         window.clearInterval(intervalId)
         videoFrame.current.pause()
       })
-    } 
-
+    }
+    window.removeEventListener('resize', () => { })
+    
+    selectCamera.current.disabled = true
   }
 
   const handleStop = () => {
@@ -60,17 +63,18 @@ const FaceDetection = () => {
       videoFrame.current.pause()
       window.clearInterval(intervalId)
       videoFrame.current.srcObject.getTracks()[0].stop()
-      canvaRef.current.getContext('2d').clearRect(0,0,videoFrame.current.videoWidth,videoFrame.current.videoHeight)
+      canvaRef.current.getContext('2d').clearRect(0, 0, videoFrame.current.videoWidth, videoFrame.current.videoHeight)
       videoFrame.current.srcObject = null
       socket = null
+      selectCamera.current.disabled = false
     }
-    
+
   }
 
   const drawFaceRectangles = (video, canvas, data) => {
     const ctx = canvas.current.getContext('2d')
-    ctx.width = video.current.videoWidth
-    ctx.height = video.current.videoHeight
+    ctx.width = videoFrame.current.videoWidth
+    ctx.height = videoFrame.current.videoHeight
     ctx.beginPath()
 
     for (let elem of data.data) {
@@ -78,10 +82,10 @@ const FaceDetection = () => {
       const [x0, y0, x1, y1] = elem.area
       ctx.strokeStyle = '#49fb35'
       ctx.beginPath()
-      ctx.font = "10px Lora"
+      ctx.font = viewport <= 784 ? "10px Lora" : "16px Lora" 
       ctx.fillStyle = '#49fb35'
       ctx.fillText(`Age: ${elem.age} Confi: ${elem.age_confi}`, x0, y0 - 5)
-      ctx.fillText(`Gender: ${elem.gender} Confi: ${elem.gender_confi}`, x0 + 150, y0 - 5)
+      ctx.fillText(`Gender: ${elem.gender} Confi: ${elem.gender_confi}`, x0, y0 - 15)
       ctx.rect(x0, y0, x1, y1)
       ctx.stroke()
 
@@ -102,6 +106,9 @@ const FaceDetection = () => {
         }
       }
       ).catch(err => alert(err))
+    window.addEventListener('resize', () => {
+      setViewport(window.innerWidth)
+    })
   }, [])
 
   return (
@@ -115,7 +122,7 @@ const FaceDetection = () => {
         </motion.h3>
 
         <motion.div
-          className="mt-3"
+          className="mt-3 border-5 shadow p-1"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{
             opacity: 1,
@@ -124,7 +131,7 @@ const FaceDetection = () => {
           }}
           viewport={{ once: true }}
         >
-          <div className="container">
+          <div className="container mb-3">
             <div id="form-connect" className="d-lg-flex d-block align-content-center">
               <select id="selection" ref={selectCamera} className="form-control w-50">
               </select>
@@ -132,14 +139,10 @@ const FaceDetection = () => {
               <button className="btn btn-warning m-2" type="button" onClick={handleStop}>Stop</button>
             </div>
           </div>
-
-          <div className="container m-5">
-            <div style={{ display: "flex" }}>
-              <video id="video-frame" ref={videoFrame} className="w-auto h-auto"/>
-              <canvas id="canvas-detection" ref={canvaRef} className="position-absolute w-auto h-auto"/>
-            </div>
+          <div style={{ display: "flex" }}>
+            <video id="video-frame" ref={videoFrame} className="widthXheight" />
+            <canvas id="canvas-detection" ref={canvaRef} className="position-absolute widthXheight" />
           </div>
-
 
         </motion.div>
       </div>
