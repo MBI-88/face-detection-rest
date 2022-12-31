@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env_backend
+      - ./backend/.env_backend
   
   frontend:
     build: ./frontend
@@ -15,5 +15,5 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - ./frontend/.env
   
