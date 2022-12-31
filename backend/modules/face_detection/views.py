@@ -1,6 +1,5 @@
 from fastapi import (APIRouter, WebSocket,
-                     WebSocketDisconnect, Response,
-                     Body, Depends, status)
+                     WebSocketDisconnect, status)
 from .socket_tools import recive_data, send_data, cv2, np
 from asyncio import create_task, Queue
 
