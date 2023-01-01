@@ -10,7 +10,7 @@ const Article2 = () => {
         className="container-fluid fs-2 text-start pt-5 pb-3"
         animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
         transition={{ duration: 10, repeat: Infinity, delay: 1 }}>
-        Google Translate API
+        Google Translate
 
       </motion.h1>
       <motion.section
