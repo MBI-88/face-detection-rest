@@ -37,11 +37,10 @@ const Landmarks = () => {
             }
             ).catch(err => alert(err))
 
-        loadModels()
-
         window.addEventListener('resize', () => {
             setViewport(window.innerWidth)
         })
+        loadModels()
     }, [])
 
     const handleStart = () => {
