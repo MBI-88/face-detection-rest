@@ -14,7 +14,7 @@ const FaceDetection = () => {
   let intervalId = null
 
   const handleStart = () => {
-    if (socket === null) {
+    if (socket === null && selectCamera.current.value !== null) {
       socket = new WebSocket('ws://localhost:8000/face-detection')
       socket.addEventListener('open', () => {
         const deviceId = selectCamera.current.value
@@ -53,7 +53,7 @@ const FaceDetection = () => {
       })
     }
     window.removeEventListener('resize', () => { })
-    
+
     selectCamera.current.disabled = true
   }
 
@@ -73,8 +73,8 @@ const FaceDetection = () => {
 
   const drawFaceRectangles = (video, canvas, data) => {
     const ctx = canvas.current.getContext('2d')
-    ctx.width = videoFrame.current.videoWidth
-    ctx.height = videoFrame.current.videoHeight
+    ctx.width = video.current.videoWidth
+    ctx.height = video.current.videoHeight
     ctx.beginPath()
 
     for (let elem of data.data) {
@@ -82,7 +82,7 @@ const FaceDetection = () => {
       const [x0, y0, x1, y1] = elem.area
       ctx.strokeStyle = '#49fb35'
       ctx.beginPath()
-      ctx.font = viewport <= 784 ? "10px Lora" : "16px Lora" 
+      ctx.font = viewport <= 784 ? "10px Lora" : "16px Lora"
       ctx.fillStyle = '#49fb35'
       ctx.fillText(`Age: ${elem.age} Confi: ${elem.age_confi}`, x0, y0 - 5)
       ctx.fillText(`Gender: ${elem.gender} Confi: ${elem.gender_confi}`, x0, y0 - 15)
@@ -114,16 +114,30 @@ const FaceDetection = () => {
   return (
     <section className="mt-5 mb-5">
       <div className="container p-2">
-        <motion.h3 className="fs-3 text-start"
+        <motion.h3 className="fs-3 text-start fw-bold"
           animate={{ color: ['#40e612', '#7a19db9e', '#d31a1ab0', '#2551e2fe'], animationTimingFunction: 'ease' }}
           transition={{ duration: 10, repeat: Infinity, delay: 1 }}
         >
-          Face Detection local model
+          Age Gender and Face Detection using OpenCv
         </motion.h3>
-
+        <motion.p
+          className="fs-5 text-start"
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { delay: 1 }
+          }}
+          viewport={{ once: true }}
+        >
+          This model uses OpenCv library for detecting age, gender and face.<br />
+          It's based on Python 3.11 and FastApi framework.<br />
+          Based on some rage of age tags, the model detects a face and <br />
+          its age and gender.<br />
+        </motion.p>
         <motion.div
           className="mt-3 border-5 shadow p-1"
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 120 }}
           whileInView={{
             opacity: 1,
             y: 0,

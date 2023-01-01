@@ -7,7 +7,7 @@ import Article5 from './components/article5/Article5'
 import Article6 from './components/article6/Article6'
 import FaceDetection from './components/faceDetectionModel/FaceDetection'
 import Header from './components/header/Header'
-import Landmarks from './components/Landmarks/Landmarks'
+
 
 const Body = () => {
 
@@ -19,7 +19,6 @@ const Body = () => {
       <Article3 />
       <Article4 />
       <FaceDetection />
-      <Landmarks />
       <Article5 />
       <Article6 />
       
