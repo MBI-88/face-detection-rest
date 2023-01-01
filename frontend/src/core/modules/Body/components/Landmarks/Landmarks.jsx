@@ -14,7 +14,7 @@ const Landmarks = () => {
     const loadModels = () => {
         const MODEL_URL = `http://localhost:3000/models`;
         Promise.all([
-            faceApi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+            //faceApi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
             faceApi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
             faceApi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
             faceApi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
@@ -37,11 +37,10 @@ const Landmarks = () => {
             }
             ).catch(err => alert(err))
 
-        loadModels()
-
         window.addEventListener('resize', () => {
             setViewport(window.innerWidth)
         })
+        loadModels()
     }, [])
 
     const handleStart = () => {
@@ -68,7 +67,7 @@ const Landmarks = () => {
 
                     const detections = await faceApi.detectAllFaces(
                         videoRef.current,
-                        new faceApi.TinyFaceDetectorOptions()
+                        new faceApi.SsdMobilenetv1Options()
                     ).withFaceLandmarks().withFaceExpressions();
 
 

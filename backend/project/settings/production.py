@@ -6,27 +6,27 @@ from .develop import (get_config, HEADERS, GZipMiddleware,
 
 settings = get_config()
 
-DEBUG = settings.DEBUG
+DEBUG_PRO = settings.DEBUG
 
 # Hash password
 
-HASH_KEY = settings.HASH_KEY
+HASH_KEY_PRO = settings.HASH_KEY
 
 # Origins
 
-ORIGINS = [origin for origin in settings.ORIGINS.split(',')]
+ORIGINS_PRO = [origin for origin in settings.ORIGINS.split(',')]
 
 # HOST APP
 
-HOST_APP = settings.HOST_APP
+HOST_APP_PRO = settings.HOST_APP
 
 # PORT APP
 
-PORT_APP = settings.PORT_APP
+PORT_APP_PRO = settings.PORT_APP
 
 # Credentials
 
-CREDENTIALS = settings.CREDENTIALS
+CREDENTIALS_PRO = settings.CREDENTIALS
 
 # Allowed methods
 
@@ -34,6 +34,6 @@ METHODS = [method for method in settings.METHODS.split(',')]
 
 # Allowed_hosts 
 
-ALLOWED_HOSTS = [host for host in settings.ALLOW_HOSTS.split(',')]
+ALLOWED_HOSTS_PRO = [host for host in settings.ALLOW_HOSTS.split(',')]
 
 # Data base

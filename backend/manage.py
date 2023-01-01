@@ -43,20 +43,20 @@ if __name__ == "__main__":
             if selection.settings == 'production':
                 from project.settings.production import (
                     TrustedHostMiddleware, GZipMiddleware,
-                    CORSMiddleware, HEADERS, ORIGINS, HOST_APP, PORT_APP,
-                    CREDENTIALS, DEBUG, METHODS, ALLOWED_HOSTS
+                    CORSMiddleware, HEADERS, ORIGINS_PRO, HOST_APP_PRO, PORT_APP_PRO,
+                    CREDENTIALS_PRO, DEBUG_PRO, METHODS, ALLOWED_HOSTS_PRO
                 )
 
-                app.debug = DEBUG
-                host = HOST_APP
-                port = PORT_APP
+                app.debug = DEBUG_PRO
+                host = HOST_APP_PRO
+                port = PORT_APP_PRO
 
                 # Production Middleware
 
-                app.add_middleware(CORSMiddleware, allow_headers=HEADERS, allow_origins=ORIGINS,
-                                   allow_credentials=CREDENTIALS, allow_methods=METHODS)
+                app.add_middleware(CORSMiddleware, allow_headers=HEADERS, allow_origins=ORIGINS_PRO,
+                                   allow_credentials=CREDENTIALS_PRO, allow_methods=METHODS)
                 app.add_middleware(TrustedHostMiddleware,
-                                   allowed_hosts=ALLOWED_HOSTS)
+                                   allowed_hosts=ALLOWED_HOSTS_PRO)
                 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
             else:
