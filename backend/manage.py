@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
             print(f"[+] Runing server debug mode {app.debug}")
             server.run('manage:app', host=host,
-                       port=port, reload=True)
+                       port=port, reload=True, workers=4)
 
         case ('tests'):
             # Test mode

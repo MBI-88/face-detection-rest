@@ -25,12 +25,12 @@ async def websocket(websocket: WebSocket) -> None:
 @route.on_event('startup')
 async def load_model() -> None:
     global face_model, age_model, gender_model, age_gender_average_image
-    face_model = cv2.dnn.readNetFromCaffe('/var/www/html/face-detection-rest/backend/face_models/deploy.prototxt',
-                                          '/var/www/html/face-detection-rest/backend/face_models/res10_300x300_ssd_iter_140000.caffemodel')
-    age_model = cv2.dnn.readNetFromCaffe("/var/www/html/face-detection-rest/backend/face_models/age_net_deploy.prototxt",
-                                         "/var/www/html/face-detection-rest/backend/face_models/age_net.caffemodel")
-    gender_model = cv2.dnn.readNetFromCaffe("/var/www/html/face-detection-rest/backend/face_models/gender_net_deploy.prototxt",
-                                            "/var/www/html/face-detection-rest/backend/face_models/gender_net.caffemodel")
+    face_model = cv2.dnn.readNetFromCaffe('/app/face_models/deploy.prototxt',
+                                          '/app/face_models/res10_300x300_ssd_iter_140000.caffemodel')
+    age_model = cv2.dnn.readNetFromCaffe("/app/face_models/age_net_deploy.prototxt",
+                                         "/app/face_models/age_net.caffemodel")
+    gender_model = cv2.dnn.readNetFromCaffe("/app/face_models/gender_net_deploy.prototxt",
+                                            "/app/face_models/gender_net.caffemodel")
     age_gender_average_image = np.load(
-        "/var/www/html/face-detection-rest/backend/face_models/average_face.npy")
+        "/app/face_models/average_face.npy")
 
