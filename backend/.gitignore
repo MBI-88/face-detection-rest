@@ -1,6 +1,3 @@
 /coverage
 /__pycache__
 **/__pycache__
-Dockerfile
-.dockerignore
-.env_backend
