@@ -5,7 +5,7 @@ services:
     build: backend
     image: face-backend:latest
     ports:
-      - "8000:8000"
+      - "8080:8080"
     env_file:
       - backend/.env_backend
   
@@ -13,7 +13,7 @@ services:
     build: frontend
     image: face-frontend:latest
     ports:
-      - "3000:3000"
+      - "5000:5000"
     env_file:
       - frontend/.env
   
