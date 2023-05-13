@@ -5,7 +5,6 @@
 /coverage
 
 .DS_Store
-.env
 .gitignore
 .env.local
 .env.development.local

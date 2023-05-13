@@ -5,7 +5,7 @@ services:
     build: backend
     image: face-detection-backend:1.0
     ports:
-      - "8080:8080"
+      - "8000:8000"
     env_file:
       - backend/.env_backend
  
@@ -15,7 +15,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "5000:5000"
+      - "3000:3000"
     env_file:
       - frontend/.env
  
