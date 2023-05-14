@@ -15,7 +15,7 @@ const FaceDetection = () => {
 
   const handleStart = () => {
     if (socket === null && selectCamera.current.value !== null) {
-      socket = new WebSocket('ws://localhost:8000/face-detection')
+      socket = new WebSocket('ws://localhost:8080/face-detection')
       socket.addEventListener('open', () => {
         const deviceId = selectCamera.current.value
         navigator.mediaDevices.getUserMedia({

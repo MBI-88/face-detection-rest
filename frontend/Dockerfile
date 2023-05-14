@@ -1,5 +1,5 @@
-FROM node:16.17-alpine3.16
-WORKDIR /frontend
+FROM node:18.2-alpine3.15
+WORKDIR /app
 COPY package*.json ./
 RUN npm install --production
 COPY . .
@@ -7,5 +7,5 @@ RUN npm install
 RUN npm run build
 RUN npm install -g serve
 
-EXPOSE 3000
-CMD ["serve", "-s", "build"]
+EXPOSE 80
+CMD ["serve", "-s", "build","-l","80"]
