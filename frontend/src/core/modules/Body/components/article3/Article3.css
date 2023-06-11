@@ -1,5 +1,5 @@
 .background {
-    background: url('/app/public/assets/recuento/header2.png');
+    background: url('./../../../../../../public/assets/recuento/header2.png');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -14,7 +14,7 @@
 
 @media screen and (100px <= width <=700px) {
     .background {
-        background: url('/app/public/assets/recuento/header3_420X273.png');
+        background: url('./../../../../../../public/assets/recuento/header3_420X273.png');
         background-attachment: fixed;
         background-position: center;
         background-repeat: no-repeat;
