@@ -25,6 +25,6 @@ RUN apt-get update && apt-get install -y libopencv-dev python3-opencv
 RUN pip install --upgrade pip && pip install --no-cache -r backend/requirements.txt
 
 
-EXPOSE 80 8000
+EXPOSE 80 8080
 
 CMD ["sh","-c","cd backend && nohup python manage.py runserver -s production & cd frontend && serve -l 80"]
